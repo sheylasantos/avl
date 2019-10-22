@@ -3,15 +3,18 @@
 public class Pessoa implements Indexable {
     protected String nome;
     protected int idade;
-    private int id;
+    private int chave;
 
     public Pessoa(String nome,int idade,int id){
         this.nome=nome;
         this.idade=idade;
-        this.id=id;
+        this.chave=id;
+    }
+    public Pessoa(int id){
+        this.chave=id;
     }
     @Override
     public int getKey() {
-        return id;
+        return chave;
     }
 }

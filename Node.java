@@ -5,6 +5,11 @@ public class Node<ValueType extends Indexable> {
     Node<ValueType> left = null;
     Node<ValueType> right = null;
 
+    public Node(ValueType value) {
+
+    }
+
+
     public ValueType getValue() {
         return value;
     }
@@ -47,6 +52,61 @@ public class Node<ValueType extends Indexable> {
             }
         }
 
+    }
+
+    public void acessPreOrder(NodeVisitor v){
+        v.visit(this);
+
+        if (left!=null){
+            left.acessPreOrder(v);
+        }
+        if (right!=null){
+            right.acessPreOrder(v);
+        }
+
+    }
+    public void acessInOrder(NodeVisitor v){
+
+        if (left!=null){
+            left.acessInOrder(v);
+        }
+
+        v.visit(this);
+
+        if (right!=null){
+            right.acessInOrder(v);
+        }
+
+    }
+    public void acessPostOrder(NodeVisitor v){
+        if (left!=null){
+            left.acessPostOrder(v);
+        }
+        if (right!=null){
+            right.acessPostOrder(v);
+        }
+        v.visit(this);
+    }
+
+    public int getBalanceFactor() {
+        int leftHeight = getLeft() == null ? 0 : 1 + getLeft().getHeight();
+        int rightHeight = getRight() == null ? 0 : 1 + getRight().getHeight();
+
+        return leftHeight - rightHeight;
+    }
+
+    public int getHeight(){
+        if (getLeft() == null && getRight() == null){
+            return 0;
+        }
+        if (getLeft()==null){
+            return 1 + getRight().getHeight();
+        }
+        if (getRight()==null){
+            return 1 + getLeft().getHeight();
+        }
+
+        return Math.max(1 + getLeft().getHeight(), 1 + getRight().getHeight());
     }
 
    /* public Node search(int key) {
