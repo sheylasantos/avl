@@ -1,41 +1,41 @@
 
 
-public class Node<ValueType extends Indexable> {
-    ValueType value;
-    Node<ValueType> left = null;
-    Node<ValueType> right = null;
+public class Node<Value extends Indexable> {
+    Value value;
+    Node<Value> left = null;
+    Node<Value> right = null;
 
-    public Node(ValueType value) {
-
+    public Node(Value value) {
+        this.value=value;
     }
 
 
-    public ValueType getValue() {
+    public Value getValue() {
         return value;
     }
 
-    public void setValue(ValueType value) {
+    public void setValue(Value value) {
         this.value = value;
     }
 
-    public Node<ValueType> getLeft() {
+    public Node<Value> getLeft() {
         return left;
     }
 
-    public void setLeft(Node<ValueType> left) {
+    public void setLeft(Node<Value> left) {
         this.left = left;
     }
 
-    public Node<ValueType> getRight() {
+    public Node<Value> getRight() {
         return right;
     }
 
-    public void setRight(Node<ValueType> right) {
+    public void setRight(Node<Value> right) {
         this.right = right;
     }
 
 
-    public void insert(Node<ValueType> node) {
+    public void insert(Node<Value> node) {
         if (node.value!=null){
             if (node.value.getKey() <  this.value.getKey()) {
                 if (this.left == null) {
@@ -99,14 +99,28 @@ public class Node<ValueType extends Indexable> {
         if (getLeft() == null && getRight() == null){
             return 0;
         }
-        if (getLeft()==null){
+        if (getLeft() == null){
             return 1 + getRight().getHeight();
         }
-        if (getRight()==null){
+        if (getRight() == null){
             return 1 + getLeft().getHeight();
         }
 
         return Math.max(1 + getLeft().getHeight(), 1 + getRight().getHeight());
+    }
+
+    protected Value search(int key, Node<Value> root) {
+        if (root == null) {
+            return null;
+        }
+        if (root.getValue().getKey()==key){
+            return root.getValue();
+        }
+        if (key < root.getValue().getKey()){
+            search(key,root.getLeft());
+        }
+        return search(key, root.getRight());
+
     }
 
    /* public Node search(int key) {

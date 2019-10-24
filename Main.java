@@ -12,6 +12,13 @@ public class Main {
         pessoas.insert(new Pessoa(4));
         pessoas.insert(new Pessoa(5));
         pessoas.insert(new Pessoa(6));
+        if (pessoas.isBalanced()){
+            System.out.println("BALANCEADA");
+        }
+        System.out.println(pessoas.search(3));
+        pessoas.remove(3);
+        System.out.println(pessoas.search(3));
+
 
 //        Node<Pessoa> node1 = new Node(1);
 //        node1.setValue( new Pessoa("Sheyla",25,1));
@@ -33,9 +40,7 @@ public class Main {
 //        pessoas.insert(node6);
         //AVLTree<Integer> numeros = new AVLTree<Integer>();
 
-        if (pessoas.isBalanced()){
-            System.out.printf("BALANCEADA");
-        }
+
 
         Node <Pessoa> tmp = pessoas.getRoot();
         SumVisitor s = new SumVisitor();
